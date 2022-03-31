@@ -28,7 +28,7 @@
                 foreach ($sites as $site) {
                     echo '<tr>
                             <td>
-                            <a href="index.php?siteId=' . $site['siteId'] . '">' . $site['title'] . '</a>
+                            <a href="page-details.php?siteId=' . $site['siteId'] . '">' . $site['title'] . '</a>
                         </td>
                         <td>
                         <a href="index.php?siteId=' . $site['siteId'] . '">Edit</a>
