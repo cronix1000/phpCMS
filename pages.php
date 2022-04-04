@@ -23,7 +23,7 @@
                         echo " <tr>
                             <th>Title</th>
                             <th>Theme</th>
-                    <   </tr>";
+                       </tr>";
                     }
                 }
                 catch (Exception $error) {

@@ -22,7 +22,7 @@
                     else{
                         echo " <tr>
                             <th>Email</th>
-                    <   </tr>";
+                        </tr>";
                     }
                 }
                 catch (Exception $error) {
