@@ -8,10 +8,10 @@ require 'require/header.php';
     <?php
     try{
     if(empty($_GET['invalid'])){
-        echo '<h6 class="alert alert-dark">please enter your credentials</h6>';
+        echo '<h6 class="alert alert-info">please enter your credentials</h6>';
     }
     else{
-        echo '<h6 class="alert alert-dark">Invalid Login</h6>';
+        echo '<h6 class="alert alert-danger">Invalid Login</h6>';
     }
     }
     catch (Exception $error) {

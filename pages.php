@@ -9,6 +9,7 @@
             <thead>
                 <?php
                 try{
+                    //set table structure based on admin status
                     $adminAuth = $_SESSION['admin'];
                     if($adminAuth == "admin"){
                         echo " <tr>
@@ -16,7 +17,7 @@
                             <th>Edit</th>
                             <th>Theme</th>
                             <th>Delete</th>
-                    <   </tr>";
+                       </tr>";
                     }
                     else{
                         echo " <tr>
@@ -41,9 +42,9 @@
                 $cmd->execute();
                 $sites = $cmd->fetchAll();
 
-                
+                // loop through sites queries and display sites
+                // restrict to table structure based on admin status
                 if($adminAuth == "admin"){
-                // loop through results and display inside table cells
                 foreach ($sites as $site) {
                     echo '<tr>
                             <td>
@@ -70,8 +71,9 @@
                 <td>
                 ' . $site['title'] . '
                 </td>
-                <td>
-                </td>
+                <td>'
+                . $site['theme'] . 
+                '</td>
                 </tr>';
                     }
             }

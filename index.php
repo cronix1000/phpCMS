@@ -1,5 +1,6 @@
 <?php
 try{
+    //Get siteId
     if(isset($_GET["siteId"])){
         if(is_numeric($_GET["siteId"])){
             $siteId = $_GET["siteId"];
@@ -14,6 +15,7 @@ try{
             $title = $site['title'];
             $theme = $site['theme']; 
             
+            //set theme based on theme in query
             if($theme == "Indigo/Purple"){
                 echo "<style>";
                 require 'css/IndigoPurple.css';
@@ -31,6 +33,7 @@ try{
             }
             
             require 'require/header.php';
+            // echo out the title and content from the query
             echo '<div class = "container">
                 <div class ="div-1">
                     <h1 class=".bg-primary">' . $site['title']. '</h1>

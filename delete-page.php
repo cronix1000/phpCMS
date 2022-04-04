@@ -5,10 +5,12 @@ require 'require/header.php';
         <h1>Page deleted</h1>
         <?php
         try{
+            //cehck for siteId
             if(isset($_GET["siteId"])){
                 if(is_numeric($_GET["siteId"])){
                 require 'require/db.php';
 
+                //delete page based on siteId
                 $sql = "DELETE FROM sites WHERE siteId = :siteId";
                 $cmd = $db->prepare($sql);
                 $cmd->bindParam(':siteId',$_GET['siteId'],PDO::PARAM_INT);

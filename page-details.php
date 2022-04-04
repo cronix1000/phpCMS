@@ -6,11 +6,12 @@ require 'require/header.php';
 
 
 try {
-    // check for artistId url param.  if we have one, query db & populate form.  if not show blank form
     $siteId = null;
     $title = null;
     $content = null;
 
+    //get siteId
+    //populate variables based on query
     if(isset($_GET["siteId"])){
         if(is_numeric($_GET["siteId"])){
             $siteId = $_GET["siteId"];

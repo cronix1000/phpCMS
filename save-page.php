@@ -1,15 +1,17 @@
 <?php
-    // require 'require/auth.php';
     $title = 'Save page';
     require 'require/header.php';
     try{
+
+    //get information from page-details
     $siteId = $_POST['siteId'];
     $title = $_POST['title'];
     $content = $_POST['content'];
     $theme = $_POST['theme'];
     $ok = true;
 
-     // input validation
+     // check for title and content not empty
+     //check that title does nto exceed 100 characters
      if (empty($title)) {
         echo "title is required<br />";
         $ok = false;
@@ -27,9 +29,11 @@
 
     if($ok){
         require 'require/db.php';
+        //if siteId is empty insert into the database the retrieved info
         if(empty($siteId)){
             $sql = "INSERT INTO sites (title, content, theme) VALUES (:title, :content, :theme)";
         }
+        //if siteId is not empty update the database the retrieved info
         else{
             $sql = "UPDATE sites SET title = :title, content = :content, theme = :theme WHERE siteId = :siteId";
         }
