@@ -1,4 +1,5 @@
 <?php
+try{
 $username = $_POST['username'];
 $password = $_POST['password'];
 
@@ -28,5 +29,8 @@ else {
            header('location:pages.php');
     }
 }
-
+}
+catch (Exception $error) {
+    header('location:error.php');
+}
 ?>

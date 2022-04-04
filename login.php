@@ -6,11 +6,16 @@ require 'require/header.php';
 <main class="container">
     <h1>Login</h1>
     <?php
+    try{
     if(empty($_GET['invalid'])){
         echo '<h6 class="alert alert-dark">please enter your credentials</h6>';
     }
     else{
         echo '<h6 class="alert alert-dark">Invalid Login</h6>';
+    }
+    }
+    catch (Exception $error) {
+        header('location:error.php');
     }
     ?>
     <form method="post" action="validate.php">

@@ -1,7 +1,7 @@
 <?php
 $title = 'Saving your Registration';
 require 'require/header.php';
-
+try{
 $username = $_POST['username'];
 $adminAuth = $_POST['admin'];
 $ok = true;
@@ -35,7 +35,10 @@ if($ok){
 
     echo '<p class="alert alert-info">Set Admin Status</p>';
 }
-
+}
+catch (Exception $error) {
+    header('location:error.php');
+}
 ?>
 </body>
 </html>

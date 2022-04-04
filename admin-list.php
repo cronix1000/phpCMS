@@ -17,6 +17,7 @@
             <tbody>
                 <?php
                 // connect
+                try{
                 require 'require/db.php';
 
                 // set up & run query
@@ -48,7 +49,10 @@
 
                 // disconnect
                 $db = null;
-            
+                }
+                catch (Exception $error) {
+                    header('location:error.php');
+                }
                 ?>
             </tbody>
         </table>

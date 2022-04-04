@@ -4,7 +4,7 @@ require 'require/header.php';
 ?>
         <h1>Page deleted</h1>
         <?php
-        // try{
+        try{
             if(isset($_GET["siteId"])){
                 if(is_numeric($_GET["siteId"])){
                 require 'require/db.php';
@@ -28,10 +28,10 @@ require 'require/header.php';
         else{
             echo '<div class="alert alert-danger">Site Missing</div>';
         }
-        // }
-        // catch (Exception $error){
-        //     header('location:error.php');
-        // } 
-        // ?>
+        }
+        catch (Exception $error){
+            header('location:error.php');
+        } 
+        ?>
     </body>
 </html>

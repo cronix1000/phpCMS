@@ -1,4 +1,5 @@
 <?php
+try{
     if(isset($_GET["siteId"])){
         if(is_numeric($_GET["siteId"])){
             $siteId = $_GET["siteId"];
@@ -43,6 +44,10 @@
 
         }
     }
+}
+catch (Exception $error) {
+    header('location:error.php');
+}
 ?>
     </body>
 </html>

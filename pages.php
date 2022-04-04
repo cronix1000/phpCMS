@@ -8,6 +8,7 @@
         <table class="table table-striped">
             <thead>
                 <?php
+                try{
                     $adminAuth = $_SESSION['admin'];
                     if($adminAuth == "admin"){
                         echo " <tr>
@@ -23,13 +24,17 @@
                             <th>Theme</th>
                     <   </tr>";
                     }
+                }
+                catch (Exception $error) {
+                    header('location:error.php');
+                }
                 ?>
             </thead>
             <tbody>
                 <?php
                 // connect
                 require 'require/db.php';
-
+                try{
                 // set up & run query
                 $sql = "SELECT * FROM sites";
                 $cmd = $db->prepare($sql);
@@ -72,7 +77,10 @@
             }
                 // disconnect
                 $db = null;
-            
+            }
+            catch (Exception $error) {
+                header('location:error.php');
+            }
                 ?>
             </tbody>
         </table>

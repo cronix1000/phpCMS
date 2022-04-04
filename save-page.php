@@ -2,7 +2,7 @@
     // require 'require/auth.php';
     $title = 'Save page';
     require 'require/header.php';
-
+    try{
     $siteId = $_POST['siteId'];
     $title = $_POST['title'];
     $content = $_POST['content'];
@@ -49,6 +49,10 @@
         
         echo '<p class="col-12">Site Saved</p>';
         echo '<a href="pages.php">View Pages</a>';
+    }
+    }
+    catch (Exception $error) {
+        header('location:error.php');
     }
     ?>
     </body>
