@@ -1,25 +1,43 @@
 <?php
-// require 'includes/auth.php';
+ require 'require/authentication.php';
 $title = 'page-details';
 require 'require/header.php';
 
-//not needed until creating login
-// try {
-//     $sitedId = null;
-//     $title = null;
-//     $content = null;
 
-//     if(isset($_GET['siteId'])){
-//         if(isnumeric($_GET['siteId'])){
-//             require 'includes/db.php';
 
-//             $sql = "SELECT * FROM "
-//         }
-//     }
+try {
+    // check for artistId url param.  if we have one, query db & populate form.  if not show blank form
+    $siteId = null;
+    $title = null;
+    $content = null;
 
-// }
+    if(isset($_GET["siteId"])){
+        if(is_numeric($_GET["siteId"])){
+            $siteId = $_GET["siteId"];
+            require 'require/db.php';
+
+            $sql = "SELECT * FROM sites WHERE siteId = :siteId";
+            $cmd = $db->prepare($sql);
+            $cmd->bindParam(':siteId', $siteId, PDO::PARAM_INT);
+            $cmd->execute();
+            $site = $cmd->fetch();
+            if (empty($site)) {
+                $db = null;
+                header('location:error.php');
+                exit();
+            }
+            else {
+                $title = $site['title'];
+                $content = $site['content'];
+                $db = null;                
+            }
+        }
+    }
+}
+catch (Exception $error) {
+    header('location:error.php');
+}
 ?>
-
 <main class="container">
     <h1>Page Details</h1>
     <p>All fields are required.</p>
@@ -30,9 +48,18 @@ require 'require/header.php';
         </fieldset>
         <fieldset>
             <label for="contant">content:</label>
-            <textarea rows="4" cols="50" name="content" id="content" required maxlength="100" value="<?php echo $contant; ?>" ></textarea>
+            <textarea rows="4" cols="50" name="content" id="content" required maxlength="100"><?php echo $content; ?></textarea>
         </fieldset>
+        <fieldset class="m-2">
+        <label for="admin" class="col-2">Set Theme:</label>
+            <label for="admin">Indigo/Purple:</label>
+            <input type="radio" id="theme" name="theme" value="Indigo/Purple">
+            <label for="admin">Black/Gold:</label>
+            <input type="radio" id="theme" name="theme" value="Black/Gold">
+            <label for="admin">Green/Red:</label>
+            <input type="radio" id="theme" name="theme" value="Green/Red">
         </fieldset>
+        <input type="hidden" name="siteId" id="siteId" value="<?php echo $siteId; ?>" />
         <button>Save</button>
     </form>
 </main>

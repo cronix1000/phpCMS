@@ -7,11 +7,23 @@
         <a href="page-details.php">Add a new page</a>
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
+                <?php
+                    $adminAuth = $_SESSION['admin'];
+                    if($adminAuth == "admin"){
+                        echo " <tr>
+                            <th>Title</th>
+                            <th>Edit</th>
+                            <th>Theme</th>
+                            <th>Delete</th>
+                    <   </tr>";
+                    }
+                    else{
+                        echo " <tr>
+                            <th>Title</th>
+                            <th>Theme</th>
+                    <   </tr>";
+                    }
+                ?>
             </thead>
             <tbody>
                 <?php
@@ -24,25 +36,40 @@
                 $cmd->execute();
                 $sites = $cmd->fetchAll();
 
+                
+                if($adminAuth == "admin"){
                 // loop through results and display inside table cells
                 foreach ($sites as $site) {
                     echo '<tr>
                             <td>
-                            <a href="page-details.php?siteId=' . $site['siteId'] . '">' . $site['title'] . '</a>
+                            <a href="index.php?siteId=' . $site['siteId'] . '">' . $site['title'] . '</a>
                         </td>
                         <td>
-                        <a href="index.php?siteId=' . $site['siteId'] . '">Edit</a>
+                        <a href="page-details.php?siteId=' . $site['siteId'] . '">Edit</a>
                         </td>
-                        </td>
+                        <td>'
+                         . $site['theme'] . 
+                        '</td>
                         <td>
-                            <a href="delete-site.php?siteId='. $site['siteId'] . '
-                                onclick="return confirmDelete()">
+                            <a href="delete-page.php?siteId='. $site['siteId'] . '
+                                "onclick="return confirmDelete()">
                                 Delete
                             </a>
                         </td>
                         </tr>';
                 }
-
+            }
+            else{
+                foreach ($sites as $site) {
+                echo '
+                <td>
+                ' . $site['title'] . '
+                </td>
+                <td>
+                </td>
+                </tr>';
+                    }
+            }
                 // disconnect
                 $db = null;
             
