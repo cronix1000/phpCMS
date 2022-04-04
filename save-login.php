@@ -6,7 +6,6 @@ try{
     $username = $_POST['username'];
     $password = $_POST['password'];
     $confirm = $_POST['confirm'];
-    $admin = "admin";
 
     require 'require/db.php';
 
@@ -25,13 +24,13 @@ try{
     else{
         //run hash on username
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO admins (username, passwordm,admin) VALUES (:username, :password,:admin)";
+        $sql = "INSERT INTO admins (username, passwordm) VALUES (:username, :password)";
         $cmd = $db->prepare($sql);
         $cmd-> bindParam(':username', $username, PDO::PARAM_STR, 50);
         $cmd-> bindParam(':password', $password, PDO::PARAM_STR, 50);
-        $cmd-> bindParam(':admin', $admin, PDO::PARAM_STR, 50);
         $cmd-> execute();
         echo '<p class="alert alert-info">Registration succesful</p>';
+        session_start();
     }
     $db = null;
     }   
