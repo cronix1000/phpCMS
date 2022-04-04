@@ -1,5 +1,4 @@
 <?php
- require 'require/authentication.php';
 $title = 'page-details';
 require 'require/header.php';
 
