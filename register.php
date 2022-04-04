@@ -16,7 +16,6 @@ require 'require/header.php';
         <fieldset class="m-2">
             <label for="password" class="col-2">Password:</label>
             <input type="password" name="password" id="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
-            <img src="imgs/show.png" id="showHide" alt="Show/Hide Password" onclick="showHidePassword()">
         </fieldset>
         <fieldset class="m-1">
             <label for="confirm" class="col-2">Confirm Password:</label>
