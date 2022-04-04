@@ -28,7 +28,7 @@ require 'require/header.php';
             }
         }
         else{
-            echo '<div class="alert alert-danger">Amdmin Missing</div>';
+            echo '<div class="alert alert-danger">Admin Missing</div>';
         }
         }
         catch (Exception $error){

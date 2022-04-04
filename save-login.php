@@ -1,7 +1,7 @@
 <?php
 $title = 'Saving your Registration';
 require 'require/header.php';
-
+try{
 $username = $_POST['username'];
 $password = $_POST['password'];
 $confirm = $_POST['confirm'];
@@ -43,9 +43,11 @@ if($ok){
         echo '<p class="alert alert-info">Registration succesful </p>';
     }
     $db = null;
-
-}
-
+    }   
+    }
+    catch (Exception $error) {
+        header('location:error.php');
+    }
 ?>
 </body>
 </html>
