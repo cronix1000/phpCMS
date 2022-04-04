@@ -3,23 +3,22 @@ $title = 'edit-admin';
 require 'require/header.php';
 
 try {
-    // check for artistId url param.  if we have one, query db & populate form.  if not show blank form
+    
     $userId = null;
     $username = null;
-    $password = null;
 
+    //get admin info
     if (isset($_GET['userId'])) {
         if (is_numeric($_GET['userId'])) {
             $userId = $_GET['userId'];
 
             require 'require/db.php';
 
-            // add userId filter so users can only see their own artists
             $sql = "SELECT * FROM admins WHERE userId = :userId";
             $cmd = $db->prepare($sql);
             $cmd->bindParam(':userId', $userId, PDO::PARAM_INT);
             $cmd->execute();
-            $admin = $cmd->fetch();  // use fetch() not fetchAll() for single-row queries
+            $admin = $cmd->fetch(); 
             $username = $admin['username'];
             if (empty($username)) {
                 $db = null;
@@ -38,6 +37,7 @@ catch (Exception $error) {
 }
 ?>
 
+<!-- populate values based on php variables if set -->
 <main class="container">
     <h1>Edit Admin</h1>
     <h2><?php echo $username; ?></h2>

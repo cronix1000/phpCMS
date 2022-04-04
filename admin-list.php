@@ -4,14 +4,32 @@
    ?>
         <main class="container">
         <h1>Admins</h1>
-        <a href="page-details.php">Add a new page</a>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Email</th>
-                    <th>Edit</th>
-                    <th>Admin Status</th>
-                    <th>Delete</th>
+                <?php
+                try{
+                    //set table structure based on admin status
+                    $adminAuth = $_SESSION['admin'];
+                    if($adminAuth == "admin"){
+                        echo " <tr>
+                        <th>Email</th>
+                        <th>Edit</th>
+                        <th>Admin Status</th>
+                        <th>Delete</th>
+                       </tr>";
+                    }
+                    else{
+                        echo " <tr>
+                            <th>Email</th>
+                    <   </tr>";
+                    }
+                }
+                catch (Exception $error) {
+                    header('location:error.php');
+                }
+                ?>
+
                 </tr>
             </thead>
             <tbody>
@@ -20,13 +38,14 @@
                 try{
                 require 'require/db.php';
 
-                // set up & run query
                 $sql = "SELECT * FROM admins";
                 $cmd = $db->prepare($sql);
                 $cmd->execute();
                 $admins = $cmd->fetchAll();
 
-                // loop through results and display inside table cells
+                // loop through admins queries and display admins
+                // restrict to table structure based on admin status
+                if($_SESSION['admin'] == 'admin')
                 foreach ($admins as $admin) {
                     echo '<tr>
                             <td>'
@@ -45,6 +64,13 @@
                             </a>
                         </td>
                         </tr>';
+                }
+                else if($_SESSION['admin'] == 'notAdmin')
+                foreach ($admins as $admin) {
+                    echo '<tr>
+                            <td>'
+                             . $admin['username'] .
+                        '</td>';
                 }
 
                 // disconnect
