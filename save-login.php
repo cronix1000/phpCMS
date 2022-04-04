@@ -30,7 +30,6 @@ try{
         $cmd-> bindParam(':password', $password, PDO::PARAM_STR, 50);
         $cmd-> execute();
         echo '<p class="alert alert-info">Registration succesful</p>';
-        session_start();
     }
     $db = null;
     }   
