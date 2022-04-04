@@ -47,6 +47,9 @@ try{
 
         }
     }
+    else{
+        header('location:index.php?siteId=1');
+    }
 }
 catch (Exception $error) {
     header('location:error.php');
